@@ -1,22 +1,35 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using SampleAbstractcls;
-
-internal class Program
+namespace INterfaceconcepts
 {
-    private static void Main(string[] args)
+    internal class Program
     {
-        //Abstract class cannot be instantiated
-        //It is not mandatory to have abstract method in abstract class.
-        //Generally,we go for abstract in order to show essential features and hide mthd impl
-        // Flight fli = new Flight();
-        //Object Initializer - At the time of object creation,initialize the values
-        FlightFare flightFare = new FlightFare() { FlightNo = 11, FlightName = "AirIndia", durationinhrs = 6, typedes = "International" };
-        flightFare.FlightDetails();
-        flightFare.FareDetails();
+        private static void Main(string[] args)
+        {
+            string ch;
+            do
+            {
+                Console.WriteLine("Enter the Shape: 1.Circle 2.REctangle");
+                string? type = Console.ReadLine();
 
-        //create instance for FlightFare by making as a reference to Flight which is abstract class
-        Flight ff = new FlightFare() { FlightNo = 12, FlightName = "Spicejet", durationinhrs = 3, typedes = "National" };
-        ff.FlightDetails();
-        ff.FareDetails();
+                switch (type.ToLower())
+                {
+                    case "circle":
+                        IShape ish = new Circle() { radius = 10 };
+                        ish.CalculateArea();
+                        break;
+                    case "rectangle":
+                        IShape rec = new Rect() { l = 10, b = 5 };
+                        rec.CalculateArea();
+                        break;
+                    default:
+                        IShape sq = new Circle();
+                        sq.DefaultSquare(5);
+                        break;
+                }
+                Console.WriteLine("Do you want to continue (yes/no):");
+                ch = Console.ReadLine();
+            } while (ch.Equals("yes"));
+
+        }
     }
 }
